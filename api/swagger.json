@@ -10,17 +10,11 @@
       "url": "http://localhost:3001/api"
     }
   ],
-  "tags": [
-    {
-      "name": "user",
-      "description": "Operations about users"
-    }
-  ],
   "paths": {
-    "/user": {
+    "/user/": {
       "get": {
         "tags": [
-          "user"
+          "User"
         ],
         "summary": "List of users",
         "operationId": "listUser",
@@ -30,7 +24,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/user"
                 }
               }
             }
@@ -39,7 +33,7 @@
       },
       "post": {
         "tags": [
-          "user"
+          "User"
         ],
         "summary": "Create user",
         "description": "Create a user in the app.",
@@ -49,7 +43,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/user"
               }
             }
           }
@@ -60,18 +54,389 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user",
+        "description": "Update a user in the app.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "updateUser",
+        "requestBody": {
+          "description": "Updated user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
                 }
               }
             }
           }
         }
       }
+    },
+    "/user/:id": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List a user",
+        "operationId": "listAUser",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/follow/id": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Follow someone",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "follow",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/follow"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/:id/following": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "User's following list",
+        "operationId": "followingList",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/following"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "operationId": "userId",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/auth-response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Posts list",
+        "operationId": "postsList",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/:id": {
+      "get": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "List a post",
+        "operationId": "listAPost",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/:table": {
+      "get": {
+        "tags": [
+          "MySQL"
+        ],
+        "summary": "List rows",
+        "operationId": "listRows",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MySQL"
+        ],
+        "summary": "Create a row",
+        "operationId": "postRow",
+        "requestBody": {
+          "description": "Created row in a some table",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MySQL"
+        ],
+        "summary": "Update a row",
+        "operationId": "updateRow",
+        "requestBody": {
+          "description": "Update row in a some table",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/:table/:id": {
+      "get": {
+        "tags": [
+          "MySQL"
+        ],
+        "summary": "List a row",
+        "operationId": "listARow",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/:table/query": {
+      "post": {
+        "tags": [
+          "MySQL"
+        ],
+        "summary": "Make a query",
+        "operationId": "query",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/following"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redis/:table": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "summary": "List cache",
+        "operationId": "listCache",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Redis"
+        ],
+        "summary": "Update cache",
+        "operationId": "updateCache",
+        "requestBody": {
+          "description": "Update cache",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redis/:table/:id": {
+      "get": {
+        "tags": [
+          "Redis"
+        ],
+        "summary": "List a specific cache table",
+        "operationId": "listACache",
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api-docs/user": {
+      "summary": "API documentation"
     }
   },
   "components": {
     "schemas": {
-      "User": {
+      "user": {
         "type": "object",
         "properties": {
           "id": {
@@ -81,19 +446,95 @@
           },
           "username": {
             "type": "string",
-            "example": "theUser"
+            "example": "theUser123"
           },
-          "firstName": {
+          "name": {
             "type": "string",
-            "example": "John"
-          },
-          "lastName": {
+            "example": "Manolo Pirlo"
+          }
+        }
+      },
+      "auth": {
+        "type": "object",
+        "properties": {
+          "username": {
             "type": "string",
-            "example": "James"
+            "example": "theUser123"
           },
           "password": {
             "type": "string",
-            "example": "12345"
+            "example": "tHe-password*"
+          }
+        }
+      },
+      "auth-response": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "ls3Fk.mlHJkf.s87ghb"
+          }
+        }
+      },
+      "follow": {
+        "type": "object",
+        "properties": {
+          "user_from": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "user_follow": {
+            "type": "integer",
+            "format": "int64",
+            "example": 15
+          }
+        }
+      },
+      "following": {
+        "type": "object",
+        "properties": {
+          "user_from": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "user_to": {
+            "type": "integer",
+            "format": "int64",
+            "example": 15
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "username": {
+            "type": "string",
+            "example": "theUser123"
+          },
+          "name": {
+            "type": "string",
+            "example": "Manolo Pirlo"
+          }
+        }
+      },
+      "post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "text": {
+            "type": "string",
+            "example": "Text of the post"
+          },
+          "user": {
+            "type": "integer",
+            "format": "int64",
+            "example": 15
           }
         }
       },
@@ -124,7 +565,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/user"
               }
             }
           }
@@ -132,17 +573,10 @@
       }
     },
     "securitySchemes": {
-      "petstore_auth": {
-        "type": "oauth2",
-        "flows": {
-          "implicit": {
-            "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
-            "scopes": {
-              "write:pets": "modify pets in your account",
-              "read:pets": "read your pets"
-            }
-          }
-        }
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       },
       "api_key": {
         "type": "apiKey",

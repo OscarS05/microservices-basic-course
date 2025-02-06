@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //Routes
-app.use('/', router);
+app.use('/redis', router);
 
 app.listen(config.cacheService.port, () => {
     console.log('Redis cache service listening in port: ', config.cacheService.port);

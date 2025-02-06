@@ -4,15 +4,6 @@ const config = require('../config');
 
 const mysqlUrl = process.env.MYSQL_PUBLIC_URL;
 
-// const dbconf = {
-//     host: parsedUrl.hostname,
-//     user: parsedUrl.username,
-//     password: parsedUrl.password,
-//     database: parsedUrl.pathname.split('/')[1],
-//     port: parsedUrl.port || 3306,
-//     connectTimeout: 10000,
-// };
-
 const dbconf = {
     host: config.mysql.host,
     user: config.mysql.user,
